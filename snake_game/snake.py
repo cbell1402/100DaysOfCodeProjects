@@ -8,10 +8,8 @@ class Snake:
         self.head = self.body_parts[0]
 
     def create_snake(self):
-
         for position in STARTING_POSITIONS:
             self.add_body_part(position)
-
 
     def add_body_part(self, position):
         snake_body = Turtle("square")
@@ -23,6 +21,12 @@ class Snake:
     def extend(self):
         self.add_body_part(self.body_parts[-1].position())
 
+    def reset(self):
+        for parts in self.body_parts:
+            parts.goto(1000,0)
+        self.body_parts.clear()
+        self.create_snake()
+        self.head = self.body_parts[0]
 
     def move(self):
         for parts in range(len(self.body_parts) - 1, 0, -1):
