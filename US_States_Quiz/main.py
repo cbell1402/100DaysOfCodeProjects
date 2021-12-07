@@ -14,7 +14,6 @@ game_on = True
 amount_correct = 0
 amount_guessed = 0
 completed_states = []
-missed = []
 while game_on:
     user_input = screen.textinput(f"{amount_correct}/50 States Correct", "Name a state:").title()
 
@@ -30,11 +29,9 @@ while game_on:
         game_on = False
 
     if amount_guessed == 50 or user_input == "Exit":
-        game_on = False
-        for missed_states in states:
-            if missed_states not in completed_states:
-                missed.append(missed_states)
+        missed = [state for state in states if state not in completed_states]
         missed_data = pandas.DataFrame(missed)
         missed_data.to_csv("states_to_learn.csv")
+        break
 
     amount_guessed += 1
